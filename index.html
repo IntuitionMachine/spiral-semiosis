@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0d1110">
-<meta name="description" content="Intuition Machine Semiosis Atlas — an interactive instrument for exploring 66 sign classes, semiosis dynamics, meaning construction, and LLM correspondences.">
+<meta name="description" content="Intuition Machine Semiosis Atlas — an interactive instrument inspired by Vinicius Romanini’s Minute Semeiotic, exploring 66 sign classes, semiosis dynamics, meaning construction, and LLM correspondences.">
 <meta property="og:title" content="Semiosis Atlas — Intuition Machine">
 <meta property="og:description" content="Interactive exploration of semiosis, meaning construction, 66 sign classes, and LLM correspondence.">
 <title>Semiosis Atlas — Intuition Machine</title>
@@ -825,6 +825,21 @@ html[data-theme="light"] .topbar:after{opacity:.55}
   .im-product{display:none}
 }
 
+
+/* v23 — source attribution links */
+.source-link-pill{text-decoration:none;display:inline-flex;align-items:center}
+.source-link-pill:hover{color:var(--text);border-color:#6f8368}
+.source-origin{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.source-origin a{color:var(--accent);text-decoration:none;font-weight:700}
+.source-origin a:hover{text-decoration:underline}
+.im-footer-meta .footer-source{margin-top:2px}
+.im-footer-meta .footer-source a{display:inline;color:var(--accent)}
+.modal a{color:var(--accent);text-decoration:none}
+.modal a:hover{text-decoration:underline}
+html[data-theme="light"] .source-origin a,
+html[data-theme="light"] .im-footer-meta .footer-source a,
+html[data-theme="light"] .modal a{color:#4f7438}
+
 </style>
 </head>
 <body>
@@ -834,7 +849,7 @@ html[data-theme="light"] .topbar:after{opacity:.55}
       <span class="im-lockup"><img src="https://intuitionmachine.com/assets/img/logo-lockup.png" alt="Intuition Machine"></span>
       <span class="im-product"><strong>Semiosis Atlas</strong><small>Meaning construction · 66 signs · LLM correspondence</small></span>
     </a>
-    <div class="top-actions"><div class="mode-switch top-mode" role="group" aria-label="Learning mode"><button class="mode-btn" id="conceptModeBtn">Learn concepts</button><button class="mode-btn active" id="processModeBtn">Watch process</button></div><button class="pill" id="themeToggle" aria-pressed="false" title="Switch between dark and light themes">☀ Light theme</button><button class="pill" id="classicToggle">Show 10 classic anchors</button><button class="pill" id="openNotes">Model notes</button><button class="pill primary" id="tourBtn">Restart scenario</button></div>
+    <div class="top-actions"><div class="mode-switch top-mode" role="group" aria-label="Learning mode"><button class="mode-btn" id="conceptModeBtn">Learn concepts</button><button class="mode-btn active" id="processModeBtn">Watch process</button></div><button class="pill" id="themeToggle" aria-pressed="false" title="Switch between dark and light themes">☀ Light theme</button><button class="pill" id="classicToggle">Show 10 classic anchors</button><a class="pill source-link-pill" href="https://minutesemeiotic.org/" target="_blank" rel="noopener" title="Open Minute Semeiotic, the conceptual source for this interface">Source · Minute Semeiotic ↗</a><button class="pill" id="openNotes">Model notes</button><button class="pill primary" id="tourBtn">Restart scenario</button></div>
   </header>
 
   <section class="hero">
@@ -1128,7 +1143,7 @@ html[data-theme="light"] .topbar:after{opacity:.55}
   </main>
 
   <section class="source-strip">
-    <article class="panel source-card"><div class="eyebrow">From the uploaded excerpt</div><div class="quote">“More than one phase can be active at the same time.”</div><p>The meaning panel therefore does not force understanding into a single stage. Its phase ribbon can keep <b>Perceptive, Inquisitive, Deliberative,</b> and <b>Scientific</b> activity co-present while the interpretant changes; the spiral can also show interpolation rather than one-way progression.</p><footer>Romanini · Minute Semeiotic · uploaded excerpt, p. 1</footer></article>
+    <article class="panel source-card"><div class="eyebrow">From the uploaded excerpt</div><div class="quote">“More than one phase can be active at the same time.”</div><p>The meaning panel therefore does not force understanding into a single stage. Its phase ribbon can keep <b>Perceptive, Inquisitive, Deliberative,</b> and <b>Scientific</b> activity co-present while the interpretant changes; the spiral can also show interpolation rather than one-way progression.</p><p class="source-origin"><span class="provenance-badge source">Conceptual source</span> <a href="https://minutesemeiotic.org/" target="_blank" rel="noopener">Minute Semeiotic — Vinicius Romanini ↗</a></p><footer>Romanini · Minute Semeiotic · uploaded excerpt, p. 1</footer></article>
     <article class="panel source-card"><div class="eyebrow">Broader model used for the 66-class view</div><h3>Classification and process are connected, but not identical.</h3><p>Romanini’s broader work describes a periodic table of 66 possible sign classes and a recursive solenoid of semiosis with four periods. This UI keeps those two ideas visually adjacent. The linked cursor is driven by authored scenarios rather than a generic traversal. Between event anchors, the cursor now follows one-correlate neighbor hops; every hop gets the same playback duration, and the spiral advances over exactly that same interval. A scenario may remain in one class, revisit an earlier region, branch toward alternatives, or stabilize elsewhere. This is an explanatory projection, not a claim that semiosis has a unique class-by-class time order.</p></article>
   </section>
 
@@ -1141,6 +1156,7 @@ html[data-theme="light"] .topbar:after{opacity:.55}
     </div>
     <div class="im-footer-meta">
       <span>Interactive semiotics · meaning construction · LLM correspondence</span>
+      <span class="footer-source">Ideas grounded in <a href="https://minutesemeiotic.org/" target="_blank" rel="noopener">Minute Semeiotic ↗</a></span>
       <a href="https://intuitionmachine.com/" target="_blank" rel="noopener">intuitionmachine.com ↗</a>
     </div>
   </footer>
