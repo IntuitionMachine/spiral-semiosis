@@ -1,10 +1,14 @@
+
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0d1110">
-<title>Semiosis Atlas — 66 sign classes + process</title>
+<meta name="description" content="Intuition Machine Semiosis Atlas — an interactive instrument for exploring 66 sign classes, semiosis dynamics, meaning construction, and LLM correspondences.">
+<meta property="og:title" content="Semiosis Atlas — Intuition Machine">
+<meta property="og:description" content="Interactive exploration of semiosis, meaning construction, 66 sign classes, and LLM correspondence.">
+<title>Semiosis Atlas — Intuition Machine</title>
 <script>
 (function(){
   try{
@@ -717,17 +721,124 @@ html[data-theme="light"] .timeline-playhead{background:#38572a;box-shadow:0 0 0 
 html[data-theme="light"] .timeline-playhead i{background:#587a3a;border-color:#f8f7f2}
 html[data-theme="light"] .timeline-playhead:after{color:#405735}
 
+
+/* v14 — Intuition Machine branding */
+:root{
+  --im-teal:#73b4aa;
+  --im-teal-soft:#8fc5bc;
+  --im-indigo:#353776;
+  --im-indigo-soft:#555a9c;
+  --im-paper:#f4f1e9
+}
+.im-brand{text-decoration:none;color:inherit;min-width:0}
+.im-lockup{
+  width:146px;height:48px;display:flex;align-items:center;justify-content:center;
+  padding:5px 8px;border-radius:9px;background:var(--im-paper);
+  border:1px solid #d5d0c4;box-shadow:0 4px 18px #0003;flex:0 0 auto
+}
+.im-lockup img{display:block;max-width:100%;max-height:100%;width:auto;height:auto}
+.im-product{
+  min-width:0;padding-left:12px;border-left:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center
+}
+.im-product strong{
+  font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--text)
+}
+.im-product small{
+  display:block;color:var(--muted);font-size:8px;letter-spacing:.08em;margin-top:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:310px
+}
+.im-kicker{color:var(--im-teal-soft);font-weight:800}
+.topbar{height:78px}
+.topbar:after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,var(--im-teal) 0%,var(--im-indigo-soft) 30%,transparent 72%);
+  opacity:.42;pointer-events:none
+}
+.topbar{position:relative}
+.pill.primary{
+  background:linear-gradient(135deg,var(--im-teal-soft),#bed68f);
+  color:#14201d;border-color:#91ba9e
+}
+.brand:hover .im-lockup{border-color:var(--im-teal);box-shadow:0 5px 22px #0004,0 0 0 1px #73b4aa28}
+.brand:hover .im-product strong{color:var(--im-teal-soft)}
+.mode-btn.active{box-shadow:inset 0 -1px 0 #73b4aa33,0 1px 4px #0005}
+.provenance-badge.analogy{border-color:#71649a}
+.llm-col-head.machine,.llm-loop-key span:last-child{color:#aeb1e8}
+.approx-key b{color:#aeb1e8}
+
+/* small IM signature accents without changing semantic category colors */
+.correspondence-head,.meaning-head{position:relative}
+.correspondence-head:before,.meaning-head:before{
+  content:"";position:absolute;left:0;top:-2px;width:34px;height:2px;border-radius:999px;
+  background:linear-gradient(90deg,var(--im-teal),var(--im-indigo-soft))
+}
+.im-footer{
+  margin-top:18px;padding:16px 2px 2px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;color:var(--muted)
+}
+.im-footer-brand{display:flex;align-items:center;gap:12px;min-width:0}
+.im-footer-lockup{
+  width:116px;height:39px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;background:var(--im-paper);padding:4px 6px;border:1px solid #d3cfc4;flex:0 0 auto
+}
+.im-footer-lockup img{display:block;max-width:100%;max-height:100%}
+.im-footer-brand strong{display:block;color:var(--text);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.im-footer-brand span{display:block;font-size:7px;margin-top:2px}
+.im-footer-meta{text-align:right;font-size:7px;line-height:1.6}
+.im-footer-meta span{display:block}
+.im-footer-meta a{color:var(--im-teal-soft);text-decoration:none;font-weight:700}
+.im-footer-meta a:hover{text-decoration:underline}
+
+/* light mode branding */
+html[data-theme="light"] .im-lockup,
+html[data-theme="light"] .im-footer-lockup{background:#fff;border-color:#d1ccc0;box-shadow:0 3px 14px #4e544918}
+html[data-theme="light"] .im-product{border-left-color:#d4d0c5}
+html[data-theme="light"] .im-product strong{color:#303a34}
+html[data-theme="light"] .im-kicker{color:#407f78}
+html[data-theme="light"] .pill.primary{
+  background:linear-gradient(135deg,#7eb8af,#9dbf86);color:#14201d;border-color:#7fa69e
+}
+html[data-theme="light"] .im-footer-meta a{color:#3b7772}
+html[data-theme="light"] .topbar:after{opacity:.55}
+
+@media(max-width:1120px){
+  .im-lockup{width:120px;height:43px}
+  .im-product small{max-width:210px}
+}
+@media(max-width:860px){
+  .topbar{min-height:74px}
+  .im-lockup{width:108px;height:40px}
+  .im-product strong{font-size:11px}
+  .im-product small{display:none}
+  .im-footer{align-items:flex-start}
+}
+@media(max-width:620px){
+  .im-lockup{width:96px;height:37px;padding:4px 5px}
+  .im-product{padding-left:8px}
+  .im-product strong{font-size:9px;letter-spacing:.08em}
+  .im-footer{flex-direction:column}
+  .im-footer-meta{text-align:left}
+}
+@media(max-width:470px){
+  .im-lockup{width:82px;height:34px}
+  .im-product{display:none}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="mark" aria-hidden="true"><i></i></div><div><strong>Semiosis Atlas</strong><small>66 classes × playable semiosis</small></div></div>
+    <a class="brand im-brand" href="https://intuitionmachine.com/" target="_blank" rel="noopener" aria-label="Intuition Machine website">
+      <span class="im-lockup"><img src="https://intuitionmachine.com/assets/img/logo-lockup.png" alt="Intuition Machine"></span>
+      <span class="im-product"><strong>Semiosis Atlas</strong><small>Meaning construction · 66 signs · LLM correspondence</small></span>
+    </a>
     <div class="top-actions"><div class="mode-switch top-mode" role="group" aria-label="Learning mode"><button class="mode-btn" id="conceptModeBtn">Learn concepts</button><button class="mode-btn active" id="processModeBtn">Watch process</button></div><button class="pill" id="themeToggle" aria-pressed="false" title="Switch between dark and light themes">☀ Light theme</button><button class="pill" id="classicToggle">Show 10 classic anchors</button><button class="pill" id="openNotes">Model notes</button><button class="pill primary" id="tourBtn">Restart scenario</button></div>
   </header>
 
   <section class="hero">
-    <div><div class="eyebrow">Scenario-driven navigation through classification and process</div><h1>See how a sign <em>becomes meaningful.</em></h1><p>Start with the story, then watch attention, competing interpretants, contextual constraints, provisional understanding, and action build on one another. The solenoid and 66-class field remain synchronized views of that construction process.</p></div>
+    <div><div class="eyebrow"><span class="im-kicker">Intuition Machine</span> · Scenario-driven navigation through classification and process</div><h1>See how a sign <em>becomes meaningful.</em></h1><p>Start with the story, then watch attention, competing interpretants, contextual constraints, provisional understanding, and action build on one another. The solenoid and 66-class field remain synchronized views of that construction process.</p></div>
     <div class="concept-key"><b>66-class atlas</b><span>describes a sign</span><span class="arrow">⇄</span><b>semiosis solenoid</b><span>describes its development</span></div>
   </section>
 
@@ -1020,6 +1131,19 @@ html[data-theme="light"] .timeline-playhead:after{color:#405735}
     <article class="panel source-card"><div class="eyebrow">From the uploaded excerpt</div><div class="quote">“More than one phase can be active at the same time.”</div><p>The meaning panel therefore does not force understanding into a single stage. Its phase ribbon can keep <b>Perceptive, Inquisitive, Deliberative,</b> and <b>Scientific</b> activity co-present while the interpretant changes; the spiral can also show interpolation rather than one-way progression.</p><footer>Romanini · Minute Semeiotic · uploaded excerpt, p. 1</footer></article>
     <article class="panel source-card"><div class="eyebrow">Broader model used for the 66-class view</div><h3>Classification and process are connected, but not identical.</h3><p>Romanini’s broader work describes a periodic table of 66 possible sign classes and a recursive solenoid of semiosis with four periods. This UI keeps those two ideas visually adjacent. The linked cursor is driven by authored scenarios rather than a generic traversal. Between event anchors, the cursor now follows one-correlate neighbor hops; every hop gets the same playback duration, and the spiral advances over exactly that same interval. A scenario may remain in one class, revisit an earlier region, branch toward alternatives, or stabilize elsewhere. This is an explanatory projection, not a claim that semiosis has a unique class-by-class time order.</p></article>
   </section>
+
+  <footer class="im-footer">
+    <div class="im-footer-brand">
+      <a href="https://intuitionmachine.com/" target="_blank" rel="noopener" class="im-footer-lockup">
+        <img src="https://intuitionmachine.com/assets/img/logo-lockup.png" alt="Intuition Machine">
+      </a>
+      <div><strong>Semiosis Atlas</strong><span>An exploratory instrument by Intuition Machine</span></div>
+    </div>
+    <div class="im-footer-meta">
+      <span>Interactive semiotics · meaning construction · LLM correspondence</span>
+      <a href="https://intuitionmachine.com/" target="_blank" rel="noopener">intuitionmachine.com ↗</a>
+    </div>
+  </footer>
 </div>
 
 <dialog class="modal" id="notesModal">
@@ -1067,6 +1191,8 @@ html[data-theme="light"] .timeline-playhead:after{color:#405735}
     <p>The dual timeline does not claim that semiotic phases are transformer modules. It aligns two descriptive vocabularies over the same authored scenario time so similarities in context accumulation, competition, stabilization, output, and recursion can be inspected without treating them as identical mechanisms.</p>
     <h3>21. Context interventions are counterfactual teaching controls.</h3>
     <p>Removing a contextual cue or adding a supportive/challenging hypothetical cue changes the UI’s illustrative candidate-support field on both the semiotic and LLM-analogy sides. It does not rerun a real language model, infer new Peircean classes, or recompute the source framework. The uncertainty meters are derived from those authored support values, not from transformer logits.</p>
+    <h3>22. Intuition Machine branding is presentation, not model provenance.</h3>
+    <p>The header and footer use the Intuition Machine lockup from intuitionmachine.com and identify Semiosis Atlas as an exploratory instrument. Branding does not change which claims are Source-supported, UI interpretation, Scenario example, or LLM analogy.</p>
     <p><span class="kbd">←</span> <span class="kbd">→</span> previous/next class number · <span class="kbd">/</span> focus search · <span class="kbd">Space</span> play/pause process</p>
   </div>
 </dialog>
