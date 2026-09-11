@@ -2305,7 +2305,11 @@ function updateThreeTheme(){
         const phase=o.userData.phase??0;
         const col=o.userData.active?levelActiveColor(phase):levelBaseColor(phase);
         o.material.color.setHex(col);
-        if(o.material.emissive)o.material.emissive.setHex(col);
+        o.material.opacity=o.userData.active?.95:.84;
+        if(o.material.emissive){
+          o.material.emissive.setHex(col);
+          o.material.emissiveIntensity=o.userData.active?.62:.38;
+        }
       }else{
         o.material.color.setHex(p.guide);
       }
@@ -2317,9 +2321,14 @@ function updateThreeTheme(){
       const phase=mesh.userData.phase??0;
       const col=mesh.userData.active?levelActiveColor(phase):levelBaseColor(phase);
       mesh.material.color.setHex(col);
+      mesh.material.opacity=mesh.userData.active?.94:.82;
       if(mesh.material.emissive){
         mesh.material.emissive.setHex(col);
-        mesh.material.emissiveIntensity=mesh.userData.active?.26:.12;
+        mesh.material.emissiveIntensity=mesh.userData.active?.86:.55;
+      }
+      if(mesh.userData.halo&&mesh.userData.halo.material){
+        mesh.userData.halo.material.color.setHex(col);
+        mesh.userData.halo.material.opacity=mesh.userData.active?.20:.10;
       }
     }
   });
@@ -2422,21 +2431,33 @@ function buildSolenoid(){
 
   function makePhaseMesh(curve,index){
     const baseCol=levelBaseColor(index);
-    const mat=new THREE.MeshStandardMaterial({
-      color:baseCol,roughness:.44,metalness:.02,
-      emissive:baseCol,
-      emissiveIntensity:.12
+    const haloMat=new THREE.MeshBasicMaterial({
+      color:baseCol,transparent:true,opacity:.10,depthWrite:false
     });
-    const geom=new THREE.TubeGeometry(curve,360,.055,10,false);
+    const halo=new THREE.Mesh(new THREE.TubeGeometry(curve,360,.090,8,false),haloMat);
+
+    const mat=new THREE.MeshStandardMaterial({
+      color:baseCol,transparent:true,opacity:.82,
+      roughness:.08,metalness:0,
+      emissive:baseCol,
+      emissiveIntensity:.55,
+      depthWrite:false
+    });
+    const geom=new THREE.TubeGeometry(curve,360,.024,8,false);
     const mesh=new THREE.Mesh(geom,mat);
-    mesh.userData={phase:index,curve,active:false};
+    mesh.renderOrder=3;
+    halo.renderOrder=2;
+    mesh.userData={phase:index,curve,active:false,halo};
     return mesh;
   }
 
   function addArrow(curve,index,t=.40){
     const pos=curve.getPointAt(t),tan=curve.getTangentAt(t).normalize();
-    const mat=new THREE.MeshStandardMaterial({color:levelBaseColor(index),emissive:levelBaseColor(index),emissiveIntensity:.14,roughness:.36,metalness:.02});
-    const cone=new THREE.Mesh(new THREE.ConeGeometry(.12,.34,16),mat);
+    const mat=new THREE.MeshStandardMaterial({
+      color:levelBaseColor(index),emissive:levelBaseColor(index),emissiveIntensity:.38,
+      transparent:true,opacity:.84,roughness:.10,metalness:0,depthWrite:false
+    });
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(.072,.22,14),mat);
     cone.position.copy(pos);
     cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),tan);
     cone.userData={kind:'phase-arrow',phase:index,active:false};
@@ -2447,7 +2468,9 @@ function buildSolenoid(){
   for(let i=0;i<4;i++){
     const curve=phasePath(i);
     const mesh=makePhaseMesh(curve,i);
-    periodRing3D.push(mesh);threeScene.add(mesh);
+    periodRing3D.push(mesh);
+    if(mesh.userData.halo)threeScene.add(mesh.userData.halo);
+    threeScene.add(mesh);
     addArrow(curve,i,i===3?.31:.38);
     if(i<3)addArrow(curve,i,.58);
   }
@@ -2561,12 +2584,12 @@ function buildSolenoid(){
   return3D.visible=false;threeScene.add(return3D);
 
   pulseGlow3D=new THREE.Mesh(
-    new THREE.SphereGeometry(.23,24,18),
-    new THREE.MeshBasicMaterial({color:pal.glow,transparent:true,opacity:.18,depthWrite:false})
+    new THREE.SphereGeometry(.34,24,18),
+    new THREE.MeshBasicMaterial({color:pal.glow,transparent:true,opacity:.15,depthWrite:false})
   );
   pulse3D=new THREE.Mesh(
-    new THREE.SphereGeometry(.118,26,20),
-    new THREE.MeshStandardMaterial({color:pal.pulse,emissive:pal.pulse,emissiveIntensity:1.05,roughness:.22})
+    new THREE.SphereGeometry(.080,24,18),
+    new THREE.MeshStandardMaterial({color:pal.pulse,emissive:pal.pulse,emissiveIntensity:1.28,transparent:true,opacity:.94,roughness:.05,metalness:0,depthWrite:false})
   );
   threeScene.add(pulseGlow3D,pulse3D);
 
@@ -2637,8 +2660,13 @@ function updateThreeSpiral(fr,active){
     mesh.userData.active=on;
     const col=on?levelActiveColor(i):levelBaseColor(i);
     mesh.material.color.setHex(col);
+    mesh.material.opacity=on?.94:.82;
     mesh.material.emissive.setHex(col);
-    mesh.material.emissiveIntensity=on?.26:.12;
+    mesh.material.emissiveIntensity=on?.86:.55;
+    if(mesh.userData.halo&&mesh.userData.halo.material){
+      mesh.userData.halo.material.color.setHex(col);
+      mesh.userData.halo.material.opacity=on?.20:.10;
+    }
   });
   phaseArrow3D.forEach(arrow=>{
     const phaseIdx=arrow.userData.phase;
@@ -2646,7 +2674,11 @@ function updateThreeSpiral(fr,active){
     arrow.userData.active=on;
     const col=on?levelActiveColor(phaseIdx):levelBaseColor(phaseIdx);
     arrow.material.color.setHex(col);
-    if(arrow.material.emissive)arrow.material.emissive.setHex(col);
+    arrow.material.opacity=on?.95:.84;
+    if(arrow.material.emissive){
+      arrow.material.emissive.setHex(col);
+      arrow.material.emissiveIntensity=on?.62:.38;
+    }
   });
   periodLabel3D.forEach((label,i)=>{
     const on=visualActive.has(i);
